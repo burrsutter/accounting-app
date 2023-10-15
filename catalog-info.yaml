@@ -1,0 +1,42 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "accounting-app"
+  description: "A cool Accounting app"
+  annotations:
+    argocd/app-name: accounting-app-dev
+    backstage.io/kubernetes-id: accounting-app
+    backstage.io/kubernetes-namespace: accounting-app-dev
+    janus-idp.io/tekton-enabled : 'true'
+    backstage.io/source-location: url:https://gitlab-gitlab.apps.cluster-khs9p.sandbox1691.opentlc.com/development/accounting-app
+    backstage.io/techdocs-ref: url:https://gitlab-gitlab.apps.cluster-khs9p.sandbox1691.opentlc.com/development/accounting-app
+    gitlab.com/project-slug: development/accounting-app
+    quay.io/repository-slug: "quayadmin/accounting-app"
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://devspaces.apps.cluster-khs9p.sandbox1691.opentlc.com/#https://gitlab-gitlab.apps.cluster-khs9p.sandbox1691.opentlc.com/development/accounting-app?che-editor=che-incubator/che-code/insiders&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: https://devspaces.apps.cluster-khs9p.sandbox1691.opentlc.com/#https://gitlab-gitlab.apps.cluster-khs9p.sandbox1691.opentlc.com/development/accounting-app?che-editor=che-incubator/che-idea/latest&devfilePath=.devfile-intellij.yaml
+      title: OpenShift Dev Spaces (JetBrains IntelliJ)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user1"
+  providesApis:
+    - "accounting-app"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: "accounting-app"
+  description: "A cool Accounting app"
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "user1"
+  definition:
+    $text: ./openapi.yaml
